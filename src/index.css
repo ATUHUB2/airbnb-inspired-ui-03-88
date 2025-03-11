@@ -1,87 +1,78 @@
-/* Base styles and variables */
-@import './styles/base.css';
 
-/* Layout styles */
-@import './styles/layout/container.css';
-@import './styles/layout/typography.css';
-@import './styles/layout/variables.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Animation-related styles */
-@import './styles/animations/index.css';
-@import './styles/animations/transitions.css';
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
 
-/* Component-specific styles */
-@import './styles/components.css';
-@import './styles/components/cards.css';
-@import './styles/components/logo.css';
-@import './styles/components/misc.css';
-@import './styles/components/badges.css';
-@import './styles/components/messages.css';
-@import './styles/components/admin-messages.css';
-@import './styles/components/whatsapp/variables.css';
-@import './styles/components/whatsapp/messages.css';
-@import './styles/components/notifications/index.css';
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
 
-/* Theme-specific styles */
-@import './styles/theme.css';
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
 
-/* Utility classes */
-@import './styles/utilities.css';
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
 
-/* Make buttons more visible */
-button {
-  position: relative;
-  z-index: 10;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
 }
 
-/* Improved dropdown menu visibility */
-.dropdown-content, 
-[role="menu"],
-[data-radix-popper-content-wrapper],
-.radix-dropdown-content,
-[data-state="open"],
-.select-content,
-[data-state="open"] > div,
-[data-radix-select-content] {
-  background-color: white !important;
-  border: 1px solid #e2e8f0 !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-  z-index: 50 !important;
-  color: #1f2937 !important;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-/* Ensure menus are properly displayed */
-[data-radix-popper-content-wrapper] {
-  max-height: none !important;
-  max-width: none !important;
-  overflow: visible !important;
-  transform-origin: var(--radix-popper-transform-origin);
-}
-
-/* Fix for dialog and modals */
-[role="dialog"],
-.radix-dialog-content,
-[data-state="open"] {
-  z-index: 1000 !important;
-}
-
-/* Fix for select menu items */
-[role="option"] {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-
-[role="option"]:hover {
-  background-color: #f3f4f6 !important;
-}
-
-/* Fix for tooltip rendering */
-[data-radix-tooltip-content] {
-  z-index: 999 !important;
-  background-color: #1f2937 !important;
-  color: white !important;
-  padding: 0.5rem 0.75rem !important;
-  border-radius: 0.25rem !important;
-  font-size: 0.875rem !important;
-  line-height: 1.25rem !important;
-}
