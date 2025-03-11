@@ -1,21 +1,32 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import GeneralSettingsTab from "./GeneralSettingsTab";
-import ThemeSettingsTab from "./ThemeSettingsTab";
-import CompanySettingsTab from "./CompanySettingsTab";
-import NotificationSettingsTab from "./NotificationSettingsTab";
-import SocialSettingsTab from "./SocialSettingsTab";
-import FooterSettingsTab from "./FooterSettingsTab";
-import ContentSettingsTab from "./ContentSettingsTab";
-import ImportExportTab from "./ImportExportTab";
+import { GeneralSettingsTab } from "./GeneralSettingsTab";
+import { ThemeSettingsTab } from "./ThemeSettingsTab";
+import { CompanySettingsTab } from "./CompanySettingsTab";
+import { NotificationSettingsTab } from "./NotificationSettingsTab";
+import { SocialSettingsTab } from "./SocialSettingsTab";
+import { FooterSettingsTab } from "./FooterSettingsTab";
+import { ContentSettingsTab } from "./ContentSettingsTab";
+import { ImportExportTab } from "./ImportExportTab";
 import PasswordResetTab from "./PasswordResetTab";
 
 interface SettingsTabsProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  activeTab?: string;
+  setActiveTab?: (tab: string) => void;
+  settings?: any;
+  isMobileView?: boolean;
+  showTabsContent?: boolean;
+  setShowTabsContent?: (show: boolean) => void;
 }
 
-const SettingsTabs = ({ activeTab, setActiveTab }: SettingsTabsProps) => {
+const SettingsTabs = ({ 
+  activeTab = "general", 
+  setActiveTab = () => {}, 
+  settings = {},
+  isMobileView = false,
+  showTabsContent = true,
+  setShowTabsContent = () => {}
+}: SettingsTabsProps) => {
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
       <TabsList className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
@@ -59,7 +70,7 @@ const SettingsTabs = ({ activeTab, setActiveTab }: SettingsTabsProps) => {
       </TabsContent>
       
       <TabsContent value="import-export">
-        <ImportExportTab />
+        <ImportExportTab onImport={() => Promise.resolve(true)} onExport={() => true} />
       </TabsContent>
       
       <TabsContent value="password-reset">

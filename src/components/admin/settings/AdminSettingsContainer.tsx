@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 // Import tab components
-import { SettingsTabs } from './SettingsTabs';
+import SettingsTabs from './SettingsTabs';
 import { SettingsHeader } from './SettingsHeader';
 
 export const AdminSettingsContainer = () => {
