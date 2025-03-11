@@ -41,7 +41,6 @@ const SettingsTabs = ({
     handleInputChange: (field: any, value: any) => {}
   };
   
-  // For ContentSettingsTab, we're passing no props since it seems to not accept any
   const companyProps = { settings, handleCompanyInfoChange: () => {} };
   const notificationProps = { 
     settings, 
