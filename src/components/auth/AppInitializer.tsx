@@ -69,6 +69,11 @@ const AppInitializer = () => {
       localStorage.setItem('security_logs', JSON.stringify([]));
     }
     
+    // Initialiser le stockage des demandes de réinitialisation de mot de passe
+    if (!localStorage.getItem('password_reset_requests')) {
+      localStorage.setItem('password_reset_requests', JSON.stringify([]));
+    }
+    
     console.log("Données pour la démo initialisées!");
   }, []);
 
