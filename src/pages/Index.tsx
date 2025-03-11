@@ -75,11 +75,6 @@ const Index = () => {
     }
   }, [listings, searchTerm]);
 
-  const formatPriceFCFA = (priceEUR: number): string => {
-    const priceFCFA = Math.round(priceEUR * 655.957);
-    return priceFCFA.toLocaleString('fr-FR');
-  };
-
   const loadMoreListings = () => {
     if (visibleListings.length < filteredListings.length) {
       setVisibleListings(filteredListings.slice(0, visibleListings.length + 12));

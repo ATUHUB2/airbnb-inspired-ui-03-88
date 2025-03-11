@@ -4,7 +4,12 @@ import { Briefcase, Home, Building, Shield, MapPin } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { LOME_NEIGHBORHOODS } from '@/hooks/useListings';
+
+// Make sure we have this constant even if it's not in the hooks file
+const LOME_NEIGHBORHOODS = [
+  'Tokoin', 'Bè', 'Adidogomé', 'Agoè', 'Hédzranawoé',
+  'Kodjoviakopé', 'Nyékonakpoè', 'Baguida', 'Agbalépédogan', 'Doulassame'
+];
 
 export const HeroSection = () => {
   const navigate = useNavigate();

@@ -1,81 +1,135 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
 
-export interface NavbarMobileMenuProps {
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { BriefcaseBusiness, Home, HelpCircle, Info, MapPin, Mail, X } from 'lucide-react';
+
+interface NavbarMobileMenuProps {
   isOpen: boolean;
 }
 
 export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({ isOpen }) => {
-  const { user, logout } = useAuth();
+  const menuVariants = {
+    closed: {
+      opacity: 0,
+      y: "-100%",
+      transition: {
+        type: "tween",
+        duration: 0.3,
+        ease: "easeIn"
+      }
+    },
+    open: {
+      opacity: 1,
+      y: "0%",
+      transition: {
+        type: "tween",
+        duration: 0.3,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.1
+      }
+    }
+  };
   
-  if (!isOpen) {
-    return null;
-  }
-
+  const itemVariants = {
+    closed: { opacity: 0, y: -20 },
+    open: { opacity: 1, y: 0 }
+  };
+  
   return (
-    <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm lg:hidden">
-      <div className="flex flex-col h-full p-6">
-        <div className="flex items-center justify-end mb-8">
-          <Button variant="ghost" size="icon" className="rounded-full">
-            <X className="h-6 w-6" />
-            <span className="sr-only">Close</span>
-          </Button>
-        </div>
-        
-        <nav className="flex flex-col items-center space-y-6 text-lg font-medium">
-          <Link to="/" className="hover:text-primary transition-colors">
-            Accueil
-          </Link>
-          <Link to="/emplois" className="hover:text-primary transition-colors">
-            Emplois
-          </Link>
-          <Link to="/about" className="hover:text-primary transition-colors">
-            À propos
-          </Link>
-          <Link to="/contact" className="hover:text-primary transition-colors">
-            Contact
-          </Link>
-          
-          {user ? (
-            <>
-              <Link to="/profile" className="hover:text-primary transition-colors">
-                Mon profil
-              </Link>
-              <Link to="/favorites" className="hover:text-primary transition-colors">
-                Mes favoris
-              </Link>
-              <Link to="/reservations" className="hover:text-primary transition-colors">
-                Mes réservations
-              </Link>
-              <Link to="/messages" className="hover:text-primary transition-colors">
-                Messages
-              </Link>
-              <Link to="/notifications" className="hover:text-primary transition-colors">
-                Notifications
-              </Link>
-              <Button 
-                onClick={logout} 
-                variant="outline" 
-                className="border-primary text-primary"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 z-50 bg-white md:hidden"
+          variants={menuVariants}
+          initial="closed"
+          animate="open"
+          exit="closed"
+        >
+          <div className="container mx-auto px-4 py-6">
+            <div className="flex justify-between items-center mb-8">
+              <Link to="/" className="font-bold text-2xl">Shalom Job Center</Link>
+              <button 
+                className="text-gray-800 hover:text-sholom-primary focus:outline-none"
+                onClick={() => {
+                  // Close menu logic would go here
+                }}
               >
-                Déconnexion
-              </Button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="text-primary font-semibold transition-colors">
-                Connexion
-              </Link>
-              <Link to="/register" className="bg-primary text-white px-6 py-2 rounded-full transition-colors">
-                S'inscrire
-              </Link>
-            </>
-          )}
-        </nav>
-      </div>
-    </div>
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            
+            <nav className="flex flex-col space-y-4">
+              <motion.div variants={itemVariants}>
+                <Link to="/" className="p-4 rounded-lg flex items-center text-lg hover:bg-gray-100">
+                  <Home className="mr-3 h-5 w-5 text-sholom-primary" />
+                  Accueil
+                </Link>
+              </motion.div>
+              
+              <motion.div variants={itemVariants}>
+                <Link to="/emplois" className="p-4 rounded-lg flex items-center text-lg hover:bg-gray-100">
+                  <BriefcaseBusiness className="mr-3 h-5 w-5 text-sholom-primary" />
+                  Emplois
+                </Link>
+              </motion.div>
+              
+              <motion.div variants={itemVariants}>
+                <div className="p-4 rounded-lg">
+                  <p className="flex items-center mb-2 font-medium text-gray-800">
+                    <MapPin className="mr-3 h-5 w-5 text-sholom-primary" />
+                    Quartiers
+                  </p>
+                  <div className="ml-8 space-y-2">
+                    {['Tokoin', 'Bè', 'Adidogomé', 'Agoè', 'Kodjoviakopé'].map(neighborhood => (
+                      <Link 
+                        key={neighborhood}
+                        to={`/?q=${neighborhood}`} 
+                        className="block py-2 text-gray-600 hover:text-sholom-primary"
+                      >
+                        {neighborhood}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div variants={itemVariants}>
+                <Link to="/about" className="p-4 rounded-lg flex items-center text-lg hover:bg-gray-100">
+                  <Info className="mr-3 h-5 w-5 text-sholom-primary" />
+                  À propos de nous
+                </Link>
+              </motion.div>
+              
+              <motion.div variants={itemVariants}>
+                <Link to="/contact" className="p-4 rounded-lg flex items-center text-lg hover:bg-gray-100">
+                  <Mail className="mr-3 h-5 w-5 text-sholom-primary" />
+                  Nous contacter
+                </Link>
+              </motion.div>
+              
+              <motion.div variants={itemVariants}>
+                <Link to="/support" className="p-4 rounded-lg flex items-center text-lg hover:bg-gray-100">
+                  <HelpCircle className="mr-3 h-5 w-5 text-sholom-primary" />
+                  Support
+                </Link>
+              </motion.div>
+              
+              <motion.div variants={itemVariants} className="mt-4 pt-4 border-t">
+                <div className="flex space-x-2">
+                  <Link to="/auth/login" className="flex-1 bg-white border border-gray-300 text-gray-800 rounded-lg py-3 text-center">
+                    Connexion
+                  </Link>
+                  <Link to="/auth/register" className="flex-1 bg-sholom-primary text-white rounded-lg py-3 text-center">
+                    Inscription
+                  </Link>
+                </div>
+              </motion.div>
+            </nav>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

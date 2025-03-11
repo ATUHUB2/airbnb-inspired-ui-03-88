@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { NavbarDesktopMenu } from "./NavbarDesktopMenu";
 import { NavbarLogo } from "./NavbarLogo";
@@ -16,13 +17,13 @@ export const Navbar = () => {
   };
   
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background">
+    <header className="sticky top-0 z-40 w-full border-b bg-background shadow-sm">
       <div className="container flex h-16 items-center">
         <NavbarLogo />
         
         {/* Mobile menu toggle button */}
         <div className="md:hidden flex flex-1 justify-end">
-          <Button variant="ghost" size="icon" onClick={toggleMenu}>
+          <Button variant="ghost" size="icon" onClick={toggleMenu} className="focus:outline-none">
             <Menu className="h-6 w-6" />
             <span className="sr-only">Toggle menu</span>
           </Button>
@@ -40,3 +41,5 @@ export const Navbar = () => {
     </header>
   );
 };
+
+export default Navbar;
