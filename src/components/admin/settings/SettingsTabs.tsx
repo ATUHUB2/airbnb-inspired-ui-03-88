@@ -27,6 +27,29 @@ const SettingsTabs = ({
   showTabsContent = true,
   setShowTabsContent = () => {}
 }: SettingsTabsProps) => {
+  // Create empty props objects for each tab component
+  const generalProps = { settings, handleInputChange: () => {} };
+  const themeProps = { 
+    settings, 
+    logoUrl: '', 
+    logoUploading: false,
+    faviconUrl: '',
+    faviconUploading: false,
+    handleLogoUpload: () => Promise.resolve(''),
+    handleFaviconUpload: () => Promise.resolve(''),
+    handleThemeChange: () => {},
+    handleColorChange: () => {},
+  };
+  const contentProps = { settings, handleContentChange: () => {} };
+  const companyProps = { settings, handleCompanyInfoChange: () => {} };
+  const notificationProps = { 
+    settings, 
+    handleChange: () => {}, 
+    handleNestedChange: () => {} 
+  };
+  const socialProps = { settings, handleSocialLinkChange: () => {} };
+  const footerProps = { settings, handleFooterChange: () => {} };
+
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
       <TabsList className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
@@ -42,31 +65,31 @@ const SettingsTabs = ({
       </TabsList>
       
       <TabsContent value="general">
-        <GeneralSettingsTab />
+        <GeneralSettingsTab {...generalProps} />
       </TabsContent>
       
       <TabsContent value="theme">
-        <ThemeSettingsTab />
+        <ThemeSettingsTab {...themeProps} />
       </TabsContent>
       
       <TabsContent value="content">
-        <ContentSettingsTab />
+        <ContentSettingsTab {...contentProps} />
       </TabsContent>
       
       <TabsContent value="company">
-        <CompanySettingsTab />
+        <CompanySettingsTab {...companyProps} />
       </TabsContent>
       
       <TabsContent value="notifications">
-        <NotificationSettingsTab />
+        <NotificationSettingsTab {...notificationProps} />
       </TabsContent>
       
       <TabsContent value="social">
-        <SocialSettingsTab />
+        <SocialSettingsTab {...socialProps} />
       </TabsContent>
       
       <TabsContent value="footer">
-        <FooterSettingsTab />
+        <FooterSettingsTab {...footerProps} />
       </TabsContent>
       
       <TabsContent value="import-export">
