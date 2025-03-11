@@ -53,6 +53,10 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Add Sholom theme colors
+        "sholom-primary": "#4f46e5", // Indigo-600 for Sholom branding
+        "sholom-secondary": "#9333ea", // Purple-600 as accent
+        "sholom-accent": "#10b981", // Emerald-500 for highlights
       },
       borderRadius: {
         lg: "var(--radius)",
