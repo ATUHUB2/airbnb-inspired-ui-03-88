@@ -30,17 +30,18 @@ const SettingsTabs = ({
   // Create empty props objects for each tab component
   const generalProps = { settings, handleInputChange: () => {} };
   const themeProps = { 
-    settings, 
-    logoUrl: '', 
+    settings,
+    logoUrl: '',
     logoUploading: false,
     faviconUrl: '',
     faviconUploading: false,
     handleLogoUpload: () => Promise.resolve(''),
     handleFaviconUpload: () => Promise.resolve(''),
-    handleThemeChange: () => {},
-    handleColorChange: () => {},
+    handleThemeColorChange: (type: 'primaryColor' | 'secondaryColor', color: string) => {},
+    handleInputChange: (field: any, value: any) => {}
   };
-  const contentProps = { settings, handleContentChange: () => {} };
+  
+  // For ContentSettingsTab, we're passing no props since it seems to not accept any
   const companyProps = { settings, handleCompanyInfoChange: () => {} };
   const notificationProps = { 
     settings, 
@@ -73,7 +74,7 @@ const SettingsTabs = ({
       </TabsContent>
       
       <TabsContent value="content">
-        <ContentSettingsTab {...contentProps} />
+        <ContentSettingsTab />
       </TabsContent>
       
       <TabsContent value="company">
