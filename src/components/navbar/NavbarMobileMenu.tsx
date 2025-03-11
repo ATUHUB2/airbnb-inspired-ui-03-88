@@ -6,9 +6,10 @@ import { BriefcaseBusiness, Home, HelpCircle, Info, MapPin, Mail, X } from 'luci
 
 interface NavbarMobileMenuProps {
   isOpen: boolean;
+  onClose?: () => void;
 }
 
-export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({ isOpen }) => {
+export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({ isOpen, onClose }) => {
   const menuVariants = {
     closed: {
       opacity: 0,
@@ -37,6 +38,12 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({ isOpen }) =>
     open: { opacity: 1, y: 0 }
   };
   
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
+  
   return (
     <AnimatePresence>
       {isOpen && (
@@ -52,9 +59,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({ isOpen }) =>
               <Link to="/" className="font-bold text-2xl">Shalom Job Center</Link>
               <button 
                 className="text-gray-800 hover:text-sholom-primary focus:outline-none"
-                onClick={() => {
-                  // Close menu logic would go here
-                }}
+                onClick={handleClose}
               >
                 <X className="h-6 w-6" />
               </button>
@@ -69,7 +74,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({ isOpen }) =>
               </motion.div>
               
               <motion.div variants={itemVariants}>
-                <Link to="/emplois" className="p-4 rounded-lg flex items-center text-lg hover:bg-gray-100">
+                <Link to="/jobs" className="p-4 rounded-lg flex items-center text-lg hover:bg-gray-100">
                   <BriefcaseBusiness className="mr-3 h-5 w-5 text-sholom-primary" />
                   Emplois
                 </Link>
@@ -118,10 +123,10 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({ isOpen }) =>
               
               <motion.div variants={itemVariants} className="mt-4 pt-4 border-t">
                 <div className="flex space-x-2">
-                  <Link to="/auth/login" className="flex-1 bg-white border border-gray-300 text-gray-800 rounded-lg py-3 text-center">
+                  <Link to="/login" className="flex-1 bg-white border border-gray-300 text-gray-800 rounded-lg py-3 text-center">
                     Connexion
                   </Link>
-                  <Link to="/auth/register" className="flex-1 bg-sholom-primary text-white rounded-lg py-3 text-center">
+                  <Link to="/register" className="flex-1 bg-sholom-primary text-white rounded-lg py-3 text-center">
                     Inscription
                   </Link>
                 </div>

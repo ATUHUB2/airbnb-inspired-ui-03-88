@@ -15,6 +15,10 @@ export const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(prev => !prev);
   };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
   
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background shadow-sm">
@@ -29,8 +33,8 @@ export const Navbar = () => {
           </Button>
         </div>
         
-        {/* Pass isOpen prop to NavbarMobileMenu */}
-        <NavbarMobileMenu isOpen={isMenuOpen} />
+        {/* Pass isOpen and onClose prop to NavbarMobileMenu */}
+        <NavbarMobileMenu isOpen={isMenuOpen} onClose={closeMenu} />
         
         <div className="hidden md:flex md:flex-1 md:items-center md:justify-between">
           <NavbarDesktopMenu />

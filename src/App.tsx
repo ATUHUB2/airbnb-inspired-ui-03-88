@@ -53,6 +53,8 @@ function App() {
         <Route path="/jobs/:id" element={<JobDetail />} />
         
         {/* Auth routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
         <Route path="/auth/reset-password" element={<ResetPassword />} />
